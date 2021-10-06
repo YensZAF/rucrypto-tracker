@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteRule ^home index.php [NC,L]
+RewriteRule ^about about.php [NC,L]
+RewriteRule ^blog blog.php [NC,L]
+RewriteRule ^portfolio portfolio.php [NC,L]
+RewriteRule ^signup signup.php [NC,L]
+RewriteRule ^login login.php [NC,L]
+RewriteRule ^profile profile.php [NC,L]
+RewriteRule ^logout includes/logout-action.php [NC,L]

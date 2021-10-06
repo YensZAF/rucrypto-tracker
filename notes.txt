@@ -1,0 +1,78 @@
+ 
+create table rucrypto.users (
+    usersId int(10) primary key  auto_increment not null,
+    usersName varchar(128) not null,
+    usersEmail varchar(128) not null,
+    usersUid varchar(128) not null,
+    usersPwd varchar(128) not null,
+    usersPic LONGBLOB not null
+);
+
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://www.rucrypto.co.za/$1 [R,L]
+
+
+'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1'
+JSON structure:
+[
+  {
+    "id": "bitcoin",
+    "symbol": "btc",
+    "name": "Bitcoin",
+    "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+    "current_price": 43439,
+    "market_cap": 816181602298,
+    "market_cap_rank": 1,
+    "fully_diluted_valuation": 910615122329,
+    "total_volume": 44586215797,
+    "high_24h": 44179,
+    "low_24h": 40769,
+    "price_change_24h": 247.17,
+    "price_change_percentage_24h": 0.57226,
+    "market_cap_change_24h": 3091161125,
+    "market_cap_change_percentage_24h": 0.38017,
+    "circulating_supply": 18822237,
+    "total_supply": 21000000,
+    "max_supply": 21000000,
+    "ath": 64805,
+    "ath_change_percentage": -33.11509,
+    "ath_date": "2021-04-14T11:54:46.763Z",
+    "atl": 67.81,
+    "atl_change_percentage": 63821.5785,
+    "atl_date": "2013-07-06T00:00:00.000Z",
+    "roi": null,
+    "last_updated": "2021-09-21T12:32:39.021Z"
+  },
+  {
+    "id": "ethereum",
+    "symbol": "eth",
+    "name": "Ethereum",
+    "image": "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880",
+    "current_price": 3058.73,
+    "market_cap": 360084524104,
+    "market_cap_rank": 2,
+    "fully_diluted_valuation": null,
+    "total_volume": 30552344033,
+    "high_24h": 3118.97,
+    "low_24h": 2837.14,
+    "price_change_24h": 60.84,
+    "price_change_percentage_24h": 2.02959,
+    "market_cap_change_24h": 1783570028,
+    "market_cap_change_percentage_24h": 0.49779,
+    "circulating_supply": 117614620.874,
+    "total_supply": null,
+    "max_supply": null,
+    "ath": 4356.99,
+    "ath_change_percentage": -29.57592,
+    "ath_date": "2021-05-12T14:41:48.623Z",
+    "atl": 0.432979,
+    "atl_change_percentage": 708565.23575,
+    "atl_date": "2015-10-20T00:00:00.000Z",
+    "roi": {
+      "times": 93.18316636530987,
+      "currency": "btc",
+      "percentage": 9318.316636530988
+    },
+    "last_updated": "2021-09-21T12:33:12.907Z"
+  }]

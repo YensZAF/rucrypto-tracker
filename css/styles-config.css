@@ -1,0 +1,14 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@layer utilities {
+    .menu_active {
+        @apply bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium;
+    }
+    .menu_unactive {
+        @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium;
+    }
+}
