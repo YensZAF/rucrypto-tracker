@@ -140,3 +140,19 @@ function drawdoughChart() {
     config
   );
 }
+
+
+// Signup Form
+function check_pwd() {
+    if (document.getElementById('pwd').value == document.getElementById('pwdrepeat').value) {
+        document.getElementById('submit').disabled = false;
+        // style changes
+        document.getElementById('pwdrepeat_lock').style.color = 'rgba(52, 211, 153, 1)'; // green https://tailwindcss.com/docs/background-color
+        document.getElementById('pwdrepeat').style.color = 'rgba(52, 211, 153, 1)';
+    } else {
+        document.getElementById('submit').disabled = true;
+        // style changes
+        document.getElementById('pwdrepeat_lock').style.color = 'rgba(248, 113, 113, 1)'; // red
+        document.getElementById('pwdrepeat').style.color = 'rgba(248, 113, 113, 1)';
+    }
+}

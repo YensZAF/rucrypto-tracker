@@ -35,7 +35,7 @@
               </svg>
             </div>
 
-            <input id="name" type="text" name="name" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400" placeholder="Full Name" />
+            <input id="name" type="text" name="name" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400" placeholder="Full Name" required />
           </div>
         </div>
 
@@ -48,7 +48,7 @@
               </svg>
             </div>
 
-            <input id="email" type="text" name="email" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400" placeholder="Email" />
+            <input id="email" type="email" name="email" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400" placeholder="Email" required />
           </div>
         </div>
 
@@ -61,12 +61,13 @@
               </svg>
             </div>
 
-            <input id="uid" type="text" name="uid" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400" placeholder="Username" />
+            <input id="uid" type="text" name="uid" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400" placeholder="Username" required />
           </div>
         </div>
 
         <div class="flex flex-col mb-6">
-          <label for="pwd" class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Password:</label>
+          <label for="pwd" class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Password: </label>
+          <p class="text-xs text-gray-400 mb-1">(8 characters, at least 1 number, at least 1 letter)</p>
           <div class="relative">
             <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
               <span>
@@ -76,13 +77,13 @@
               </span>
             </div>
 
-            <input id="pwd" type="password" name="pwd" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400" placeholder="Password" />
+            <input id="pwd" type="password" name="pwd" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" onkeyup='check_pwd();' required />
           </div>
         </div>
         <div class="flex flex-col mb-6">
           <label for="pwdrepeat" class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Repeat Password:</label>
           <div class="relative">
-            <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+            <div id="pwdrepeat_lock" class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
               <span>
                 <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                   <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -90,7 +91,7 @@
               </span>
             </div>
 
-            <input id="pwdrepeat" type="password" name="pwdrepeat" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400" placeholder="Repeat Password" />
+            <input id="pwdrepeat" type="password" name="pwdrepeat" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400" placeholder="Repeat Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" onkeyup='check_pwd();' required />
           </div>
         </div>
 
@@ -101,7 +102,7 @@
         </div> -->
 
         <div class="flex w-full">
-          <button type="submit" name="submit" class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-rucrypto hover:bg-rucrypto-dark rounded py-2 w-full transition duration-150 ease-in">
+          <button type="submit" id="submit" name="submit" class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-rucrypto hover:bg-rucrypto-dark rounded py-2 w-full transition duration-150 ease-in">
             <span class="mr-2 uppercase">Signup</span>
             <span>
               <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -121,15 +122,20 @@
                     echo "<p>Fill in all fields!</p>";
                 } else if ($errorMsg == "invaliduid") {
                     echo "<p>Choose a proper username!</p>";
-                } else if ($errorMsg == "invalidemail") {
-                    echo "<p>Choose a proper email!</p>";
-                } else if ($errorMsg == "passwordsdontmatch") {
-                    echo "<p>Passwords don't match!</p>";
-                } else if ($errorMsg == "stmtfailed") {
-                    echo "<p>Something went wrong, try again!</p>";
-                } else if ($errorMsg == "usernametaken") {
-                    echo "<p>Username already taken!</p>";
-                } else if ($errorMsg == "none") {
+                } else if ($errorMsg == "usernametaken") { ?>
+                   
+                    <div class="flex justify-center items-center mt-6">
+                    <div class="inline-flex items-center font-bold text-red-500 text-xs text-center">
+                      <span>
+                        <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" stroke="currentColor">
+                          <path d="M10.185,1.417c-4.741,0-8.583,3.842-8.583,8.583c0,4.74,3.842,8.582,8.583,8.582S18.768,14.74,18.768,10C18.768,5.259,14.926,1.417,10.185,1.417 M10.185,17.68c-4.235,0-7.679-3.445-7.679-7.68c0-4.235,3.444-7.679,7.679-7.679S17.864,5.765,17.864,10C17.864,14.234,14.42,17.68,10.185,17.68 M10.824,10l2.842-2.844c0.178-0.176,0.178-0.46,0-0.637c-0.177-0.178-0.461-0.178-0.637,0l-2.844,2.841L7.341,6.52c-0.176-0.178-0.46-0.178-0.637,0c-0.178,0.176-0.178,0.461,0,0.637L9.546,10l-2.841,2.844c-0.178,0.176-0.178,0.461,0,0.637c0.178,0.178,0.459,0.178,0.637,0l2.844-2.841l2.844,2.841c0.178,0.178,0.459,0.178,0.637,0c0.178-0.176,0.178-0.461,0-0.637L10.824,10z"></path>
+                        </svg>
+                      </span>
+                      <span>Username already taken!</span>
+                </div>
+                  </div>
+
+          <?php   } else if ($errorMsg == "none") {
           ?>
 
                   <div class="flex justify-center items-center mt-6">
