@@ -59,4 +59,29 @@ function loginUser($conn, $username, $pwd) {
 
 }
 
+function addInventory($coin_uid,$userID,$conn) {
+  $sql = "SELECT * FROM cryptocurrency WHERE currency_uid = '$coin_uid';";
+  $currency = mysqli_query($conn, $sql) or die("fetchCrypto failed!");
+
+  $coinID = -1;
+  while ($row = mysqli_fetch_array($currency)) {
+    $coinID = $row['currency_id'];
+  }
+
+  $sql = "SELECT * FROM watch_list_has_cryptocurrency WHERE watch_list_id = '$userID';";
+  $currencyCheck = mysqli_query($conn, $sql) or die("fetchCrypto failed!");
+
+  while ($row = mysqli_fetch_array($currencyCheck)) {
+    if ($row['currency_id'] === $coinID) {
+      header("location: portfolio?error=coinExists");
+      exit();
+    }
+  }
+
+  $sql = "INSERT INTO watch_list_has_cryptocurrency (watch_list_id, currency_id) VALUE ('$userID','$coinID');";
+  mysqli_query($conn, $sql) or die("insertCurrency failed!");
+
+  mysqli_close($conn);
+}
+
 ?>
