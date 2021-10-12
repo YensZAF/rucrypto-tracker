@@ -128,7 +128,7 @@
       </div>
 
       <!-- Add margin if you want to see some of the overlay behind the modal-->
-      <div class="modal-content py-4 text-left px-6">
+      <div class="modal-content py-4 text-left px-6 h-1/2">
         <!--Title-->
         <div class="flex justify-between items-center pb-3">
           <p class="text-2xl font-bold">Search for Coins!</p>
@@ -140,18 +140,112 @@
         </div>
 
         <!--Body-->
-        <p>Modal content can go here</p>
-        <p>...</p>
-        <p>...</p>
-        <p>...</p>
-        <p>...</p>
-
-        <!--Footer-->
-        <div class="flex justify-end pt-2">
-          <button class="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Action</button>
-          <button class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
+        <div class="rounded shadow-md my-2 relative pin-t pin-l overflow-auto h-44">
+          <div class="p-2"><input type="text" id="myInput" onkeyup="searchAddCoins()" placeholder="Search for coins.." class="border-2 rounded h-8 w-full"></div>
+          <ul id="myUL" class="list-reset">
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" /></span><span>Bitcoin</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880" /></span><span>Ethereum</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/325/large/Tether-logo.png?1598003707" /></span><span>Tether</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/975/large/cardano.png?1547034860" /></span><span>Cardano</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png?1547034615" /></span><span>Binance Coin</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/44/large/xrp-symbol-white-128.png?1605778731" /></span><span>XRP</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/4128/large/coinmarketcap-solana-200.png?1616489452" /></span><span>Solana</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/12171/large/aJGBjJFU_400x400.jpg?1597804776" /></span><span>Polkadot</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png?1547042389" /></span><span>USD Coin</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/5/large/dogecoin.png?1547792256" /></span><span>Dogecoin</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/8284/large/luna1557227471663.png?1567147072" /></span><span>Terra</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/11939/large/shiba.png?1622619446" /></span><span>Shiba Inu</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/9576/large/BUSD.png?1568947766" /></span><span>Binance USD</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/12504/large/uniswap-uni.png?1600306604" /></span><span>Uniswap</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/2/large/litecoin.png?1547033580" /></span><span>Litecoin</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/12559/large/coin-round-red.png?1604021818" /></span><span>Avalanche</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/7598/large/wrapped_bitcoin_wbtc.png?1548822744" /></span><span>Wrapped Bitcoin</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/877/large/chainlink-new-logo.png?1547034700" /></span><span>Chainlink</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/780/large/bitcoin-cash-circle.png?1594689492" /></span><span>Bitcoin Cash</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/4380/large/download.png?1547039725" /></span><span>Algorand</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/1481/large/cosmos_hub.png?1555657960" /></span><span>Cosmos</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png?1624446912" /></span><span>Polygon</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/100/large/Stellar_symbol_black_RGB.png?1552356157" /></span><span>Stellar</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/12817/large/filecoin.png?1602753933" /></span><span>Filecoin</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/14495/large/Internet_Computer_logo.png?1620703073" /></span><span>Internet Computer</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/1167/large/VeChain-Logo-768x725.png?1547035194" /></span><span>VeChain</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/13029/large/axie_infinity_logo.png?1604471082" /></span><span>Axie Infinity</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/453/large/ethereum-classic-logo.png?1547034169" /></span><span>Ethereum Classic</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/1094/large/tron-logo.png?1547035066" /></span><span>TRON</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/9956/large/dai-multi-collateral-mcd.png?1574218774" /></span><span>Dai</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/9026/large/F.png?1609051564" /></span><span>FTX Token</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/2538/large/theta-token-logo.png?1548387191" /></span><span>Theta Network</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/976/large/Tezos-logo.png?1547034862" /></span><span>Tezos</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/4001/large/Fantom.png?1558015016" /></span><span>Fantom</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/10643/large/ceth2.JPG?1581389598" /></span><span>cETH</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/3688/large/mqTDGK7Q.png?1566256777" /></span><span>Hedera</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/69/large/monero_logo.png?1547033729" /></span><span>Monero</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/12335/large/elrond3_360.png?1626341589" /></span><span>Elrond</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/13442/large/steth_logo.png?1608607546" /></span><span>Lido Staked Ether</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/7310/large/cypto.png?1547043960" /></span><span>Crypto.com Coin</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/738/large/eos-eos-logo.png?1547034481" /></span><span>EOS</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/12632/large/pancakeswap-cake-logo_%281%29.png?1629359065" /></span><span>PancakeSwap</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/4463/large/okb_token.png?1548386209" /></span><span>OKB</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/16646/large/Logo_final-22.png?1628239446" /></span><span>eCash</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/692/large/IOTA_Swirl.png?1604238557" /></span><span>IOTA</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/9672/large/CjbT82vP_400x400.jpg?1570548320" /></span><span>Klaytn</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/3370/large/5ZOu7brX_400x400.jpg?1612437252" /></span><span>Quant</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/12645/large/AAVE.png?1601374110" /></span><span>Aave</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/13120/large/Logo_final-21.png?1624892810" /></span><span>Bitcoin Cash ABC</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/10365/large/near_icon.png?1601359077" /></span><span>Near</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/6799/large/BSV.png?1558947902" /></span><span>Bitcoin SV</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/13397/large/Graph_Token.png?1608145566" /></span><span>The Graph</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/480/large/NEO_512_512.png?1594357361" /></span><span>NEO</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/9568/large/m4zRhP5e_400x400.jpg?1576190080" /></span><span>Kusama</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/9442/large/Compound_USDC.png?1567581577" /></span><span>cUSDC</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/14483/large/token_OHM_%281%29.png?1628311611" /></span><span>Olympus</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/12681/large/UST.png?1601612407" /></span><span>TerraUSD</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/425/large/waves.png?1548386117" /></span><span>Waves</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/9281/large/cDAI.png?1576467585" /></span><span>cDAI</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/8418/large/leo-token.png?1558326215" /></span><span>LEO Token</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/7595/large/BTT_Token_Graphic.png?1555066995" /></span><span>BitTorrent</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/4344/large/Y88JAze.png?1565065793" /></span><span>Harmony</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/3263/large/CEL_logo.png?1609598753" /></span><span>Celsius Network</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/4343/large/oRt6SiEN_400x400.jpg?1591059616" /></span><span>Arweave</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/12407/large/Unknown-5.png?1599624896" /></span><span>Huobi BTC</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/12409/large/amp-200x200.png?1599625397" /></span><span>Amp</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/1364/large/Mark_Maker.png?1585191826" /></span><span>Maker</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/2069/large/Stacks_logo_full.png?1604112510" /></span><span>Stacks</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/12271/large/512x512_Logo_no_chop.png?1606986688" /></span><span>Sushi</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/6595/large/RUNE.png?1614160507" /></span><span>THORChain</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/776/large/OMG_Network.jpg?1591167168" /></span><span>OMG Network</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/19/large/dash-logo.png?1548385930" /></span><span>Dash</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/4284/large/Helium_HNT.png?1612620071" /></span><span>Helium</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/10775/large/COMP.png?1592625425" /></span><span>Compound</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/11090/large/icon-celo-CELO-color-500.png?1592293590" /></span><span>Celo</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/329/large/decred.png?1547034093" /></span><span>Decred</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/3406/large/SNX.png?1598631139" /></span><span>Synthetix Network Token</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/8834/large/Chiliz.png?1561970540" /></span><span>Chiliz</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/3348/large/Holologo_Profile.png?1547037966" /></span><span>Holo</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/8029/large/1_0YusgngOrriVg4ZYx4wOFQ.png?1553483622" /></span><span>Theta Fuel</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/4428/large/ECOMI.png?1557928886" /></span><span>ECOMI</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/242/large/NEM_Logo_256x256.png?1598687029" /></span><span>NEM</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/1102/large/enjin-coin-logo.png?1547035078" /></span><span>Enjin Coin</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/1060/large/icon-icx-logo.png?1547035003" /></span><span>ICON</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/2912/large/xdc-icon.png?1633700890" /></span><span>XDC Network</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/486/large/circle-zcash-color.png?1547034197" /></span><span>Zcash</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/16310/large/k-h6Wead_400x400.jpg?1623726134" /></span><span>Decentralized Social</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/684/large/qtum.png?1547034438" /></span><span>Qtum</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/17500/large/hjnIm9bV.jpg?1628009360" /></span><span>dYdX</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/3449/large/tusd.png?1618395665" /></span><span>TrueUSD</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/16786/large/mimlogopng.png?1624979612" /></span><span>Magic Internet Money</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/11849/large/yfi-192x192.png?1598325330" /></span><span>yearn.finance</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/2822/large/huobi-token-logo.png?1547036992" /></span><span>Huobi Token</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/1043/large/bitcoin-gold-logo.png?1547034978" /></span><span>Bitcoin Gold</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/2523/large/IOST.png?1557555183" /></span><span>IOST</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/15861/large/abracadabra-3.png?1622544862" /></span><span>Spell Token</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/13446/large/5f6294c0c7a8cda55cb1c936_Flow_Wordmark.png?1631696776" /></span><span>Flow</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/2687/large/Zilliqa-logo.png?1547036894" /></span><span>Zilliqa</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/15628/large/JM4_vQ34_400x400.png?1621394004" /></span><span>Mina Protocol</span></a></li>
+            <li><a href="#" class="p-2 block text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/3412/large/ravencoin.png?1548386057" /></span><span>Ravencoin</span></a></li>
+          </ul>
         </div>
-        
+
       </div>
     </div>
   </div>

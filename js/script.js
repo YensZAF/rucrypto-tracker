@@ -77,18 +77,18 @@ function topCoins() {
     // console.log(topCoinsArray[0]);
     for (let i = 0; i < topCoinsArray.length; i++) {
       let num = i + 1;
-      let id = topCoinsArray[i].id;
-      let symbol = topCoinsArray[i].symbol;
+      let name = topCoinsArray[i].name;
+      let pic = topCoinsArray[i].image;
       let price = topCoinsArray[i].current_price;
       let change = topCoinsArray[i].price_change_percentage_24h;
 
-      let td_id = document.getElementById("topCoinID-"+num);
+      let td_image = document.getElementById("topCoinPic-"+num);
       let td_name = document.getElementById("topCoinName-"+num);
       let td_price = document.getElementById("topCoinPrice-"+num);
       let td_change = document.getElementById("topCoinChange-"+num);
       
-      td_id.innerHTML = symbol;
-      td_name.innerHTML = id;
+      td_image.innerHTML = "<img class=\"w-7\" src=\""+pic+"\" />";
+      td_name.innerHTML = name;
       td_price.innerHTML = "$"+price;
       td_change.innerHTML = change+"%";
     } 
@@ -192,3 +192,25 @@ var openmodal = document.querySelectorAll('.modal-open')
       modal.classList.toggle('pointer-events-none')
       body.classList.toggle('modal-active')
     }
+
+
+// Search ADD coins on profile page MODAL
+function searchAddCoins() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName('li');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
