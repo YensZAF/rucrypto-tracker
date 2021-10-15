@@ -214,3 +214,32 @@ function searchAddCoins() {
     }
   }
 }
+
+// Trades TABLE
+function changeAtiveTab(event,tabID,tabType){
+  if (tabType == "buy") {
+    buyButton = document.getElementById("buy");
+    buyButton.className = 'text-white bg-green-600 text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal cursor-pointer';
+    sellButton = document.getElementById("sell");
+    sellButton.className = 'text-red-600 bg-white text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal cursor-pointer';
+  }
+  if (tabType == "sell") {
+    sellButton = document.getElementById("sell");
+    sellButton.className = 'text-white bg-red-600 text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal cursor-pointer';
+    buyButton = document.getElementById("buy");
+    buyButton.className = 'text-green-600 bg-white text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal cursor-pointer';
+  }
+  let element = event.target;
+  while(element.nodeName !== "A"){
+    element = element.parentNode;
+  }
+  ulElement = element.parentNode.parentNode;
+  aElements = ulElement.querySelectorAll("li > a");
+  tabContents = document.getElementById("tabs-id").querySelectorAll(".tab-content > div");
+  for(let i = 0 ; i < aElements.length; i++){
+    tabContents[i].classList.add("hidden");
+    tabContents[i].classList.remove("block");
+  }
+  document.getElementById(tabID).classList.remove("hidden");
+  document.getElementById(tabID).classList.add("block");
+}

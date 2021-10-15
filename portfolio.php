@@ -1,5 +1,5 @@
-<?php include_once("includes/config.php") ?>
-<?php include_once("includes/secure.php") ?>
+<?php include_once("includes/config.php"); ?>
+<?php include_once("includes/secure.php"); ?>
 
 <?php // checks if addCoin variable passed through url
   include_once("includes/functions.php");
@@ -52,38 +52,22 @@
 
 
     <!-- TRADES TABLE -->
-  <div class="container flex justify-center mx-auto">
+  <div class="container flex justify-center mx-auto pb-10">
     <div class="border-b border-gray-200 shadow overflow-auto">
       <table class="divide-y divide-gray-300 ">
         <thead class="bg-gray-50">
             <tr>
-                <th class="px-6 py-2 text-xs text-gray-500">#</th>
-                <th class="px-6 py-2 text-xs text-gray-500">Coin</th>
+                <th class="px-6 py-2 text-xs text-gray-500">Img</th>
+                <th class="px-6 py-2 text-xs text-gray-500 text-left">Coin</th>
                 <th class="px-6 py-2 text-xs text-gray-500">Price</th>
+                <th class="px-6 py-2 text-xs text-gray-500">Quantity</th>
                 <th class="px-6 py-2 text-xs text-gray-500">24h</th>
                 <th class="px-6 py-2 text-xs text-gray-500">Mkt Cap</th>
                 <th class="px-6 py-2 text-xs text-gray-500">PNL</th>
-                <th class="px-6 py-2 text-xs text-gray-500">Buy/Sell</th>
+                <th class="px-6 py-2 text-xs text-gray-500">Trade/Delete</th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-300">
-            <tr class="whitespace-nowrap">
-                <td class="px-6 py-4 text-sm text-gray-500">1</td>
-                <td id="topCoinID-1" class="px-6 py-4 text-sm text-gray-900">ID</td>
-                <td id="topCoinName-1" class="px-6 py-4 text-sm text-gray-500">Coin</td>
-                <td id="topCoinPrice-1" class="px-6 py-4 text-sm text-gray-500">0%</td>
-                <td id="topCoinChange-1" class="px-6 py-4 text-sm text-gray-500">$0.00</td>
-                <td id="topCoinChange-1" class="px-6 py-4 text-sm text-gray-500">0%</td>
-                <td id="topCoinChange-1" class="px-6 py-4 text-sm text-gray-500">
-                  <a href="#" class="inline-flex items-center font-bold hover:text-blue-500 text-gray-700 text-xs text-center align-middle">
-                      <span>
-                        <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" viewBox="-2 -2 25 25" stroke="currentColor">
-                          <path d="M12.522,10.4l-3.559,3.562c-0.172,0.173-0.451,0.176-0.625,0c-0.173-0.173-0.173-0.451,0-0.624l3.248-3.25L8.161,6.662c-0.173-0.173-0.173-0.452,0-0.624c0.172-0.175,0.451-0.175,0.624,0l3.738,3.736C12.695,9.947,12.695,10.228,12.522,10.4 M18.406,10c0,4.644-3.764,8.406-8.406,8.406c-4.644,0-8.406-3.763-8.406-8.406S5.356,1.594,10,1.594C14.643,1.594,18.406,5.356,18.406,10M17.521,10c0-4.148-3.374-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.147,17.521,17.521,14.147,17.521,10"></path>
-                        </svg>
-                      </span>
-                    </a>
-                </td>
-            </tr>
             <?php
               printInventory($_SESSION['userid'],$conn);
             ?>

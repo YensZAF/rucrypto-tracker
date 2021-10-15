@@ -1,12 +1,12 @@
-<?php include_once("includes/config.php") ?>
+<?php include_once("includes/config.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include_once("includes/head-contents.php") ?>
+<?php include_once("includes/head-contents.php"); ?>
 </head>
 <body>
 
-<?php include_once("includes/navigation.php") ?>
+<?php include_once("includes/navigation.php"); ?>
 
     <!-- <section class="signup">
         <h3>Sign Up</h3>

@@ -41,7 +41,7 @@
             <a href="about" class="<?php if ($CURRENT_PAGE=="About") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">About Us</a>
             <a href="blog" class="<?php if ($CURRENT_PAGE=="Blog") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Blog</a>
             <?php if (isset($_SESSION['useruid'])) { ?>
-            <a href="portfolio" class="<?php if ($CURRENT_PAGE=="Portfolio") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Portfolio</a>
+            <a href="portfolio" class="<?php if ($CURRENT_PAGE=="Portfolio" || $CURRENT_PAGE=="Trades") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Portfolio</a>
             <?php } ?>
           </div>
         </div>
@@ -86,8 +86,8 @@
           <div id="user-menu" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" tabindex="-1">
             <!-- Active: "bg-gray-100", Not Active: "" -->
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-            <a href="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1"><i class="fa fa-cog text-base mr-1"></i>Settings</a>
+            <a href="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-2"><i class="fa fa-sign-out text-base mr-1"></i>Sign out</a>
           </div>
         </div>
 

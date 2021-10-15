@@ -31,6 +31,10 @@ switch ($_SERVER['SCRIPT_NAME']) {
     $CURRENT_PAGE = 'Portfolio';
     $PAGE_TITLE = 'Portfolio Summary';
     break;
+  case '/rucrypto-tracker/coin-trade.php':
+    $CURRENT_PAGE = 'Trades';
+    $PAGE_TITLE = 'Trade coins';
+    break;
   default:
     $CURRENT_PAGE = 'Index';
     $PAGE_TITLE = 'Home Page';
