@@ -1,6 +1,47 @@
 <?php include_once("includes/config.php");
       include_once("includes/secure.php");
-      include_once("includes/functions.php"); ?>
+      include_once("includes/functions.php"); 
+
+  $spentCoinName = "";
+  $spentCoinPic = "";
+  $spentCoinSymbol = "";
+  $spentCoinUID = "";
+  $spentCoinID = "";
+  if (isset($_GET['coin_spent'])) {
+    $spentCoin = $_GET['coin_spent'];
+    $sql = "SELECT *
+            FROM cryptocurrency
+            WHERE currency_id = '$spentCoin';";
+    $spentCoin = mysqli_query($conn, $sql) or die("fetchMainCoin failed!");
+    while ($row = mysqli_fetch_array($spentCoin)) {
+      $spentCoinName = $row['currency_name'];
+      $spentCoinPic = $row['currency_pic'];
+      $spentCoinSymbol = $row['currency_symbol'];
+      $spentCoinUID = $row['currency_uid'];
+      $spentCoinID = $row['currency_id'];
+    }
+  }
+  $mainCoinName = "";
+  $mainCoinPic = "";
+  $mainCoinSymbol = "";
+  $mainCoinUID = "";
+  $mainCoinID = "";
+  if (isset($_GET['coin_id'])) {
+    $mainCoin = $_GET['coin_id'];
+    $sql = "SELECT *
+            FROM cryptocurrency
+            WHERE currency_id = '$mainCoin';";
+    $mainCoin = mysqli_query($conn, $sql) or die("fetchMainCoin failed!");
+    while ($row = mysqli_fetch_array($mainCoin)) {
+      $mainCoinName = $row['currency_name'];
+      $mainCoinPic = $row['currency_pic'];
+      $mainCoinSymbol = $row['currency_symbol'];
+      $mainCoinUID = $row['currency_uid'];
+      $mainCoinID = $row['currency_id'];
+    }
+  }              
+      
+      ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,7 +114,7 @@
         <div class="tab-content tab-space">
           <!-- BUY TAB -->
           <div id="tab-profile" class="w-full max-w-xs block">
-            <form>
+            <form action="includes/coin-trade-buy.php" method="post">
               <div class="mb-4 flex justify-center">
                 <span class="flex text-gray-700 text-lg font-bold mb-2 uppercase">BUY  
                 <?php
@@ -101,7 +142,7 @@
                           <span class="pr-3 uppercase">
                            <?php echo $spentCoinName; ?> 
                           </span>
-                          <input type="hidden" name="BUY_sold_currency" value="<?php echo $spentCoinID; ?>">
+                          <input type="hidden" name="BUY_sold_currency" value="<?php echo $spentCoinID; ?>" />
                         <?php
                       } else {
                           ?>
@@ -165,7 +206,7 @@
                       ?>
                     </span>
                   </div>
-                  <input type="text" name="BUY_price_per" id="BUY_price_per" class="cursor-not-allowed block w-full pl-16 py-2 shadow appearance-none border rounded text-gray-900 leading-tight focus:outline-none focus:shadow-outline" value="0" placeholder="0" disabled>
+                  <input type="text" name="BUY_price_per" id="BUY_price_per" class="cursor-not-allowed block w-full pl-16 py-2 shadow appearance-none border rounded text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline" placeholder="0">
                 </div>
               </div>
               <div class="mb-4">
@@ -173,20 +214,18 @@
                   Trade Price Today
                 </label>
                 <div class="flex">
-                  <input class="flex-initial justify-self-start cursor-not-allowed shadow appearance-none border rounded w-1/2 mr-3 py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline" id="value_usd" name="value_usd" type="text" value="$ 0.00" placeholder="api" disabled>
-                  <input class="flex-initial justify-self-end cursor-not-allowed shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline" id="value_zar" name="value_zar" type="text" value="R 0.00" placeholder="api" disabled>
+                  <input class="flex-initial justify-self-start cursor-not-allowed shadow appearance-none border rounded w-1/2 mr-3 py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline" id="value_usd" name="value_usd" type="text" placeholder="$ 0.00">
+                  <input class="flex-initial justify-self-end cursor-not-allowed shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline" id="value_zar" name="value_zar" type="text" placeholder="R 0.00">
                 </div>
               </div>
               <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="date_time">
                   Date
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date_time" name="date_time" type="datetime-local" value="2021-06-12T19:30" max="2021-06-14T00:00" placeholder="date">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date_time" name="date_time" type="datetime-local" value="2000-00-00T00:00" max="2000-00-00T00:00" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" required>
               </div>
               <div class="flex items-center justify-center">
-                <button class="bg-green-500 hover:bg-green-700 text-white font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" name="buy_submit">
-                  Buy
-                </button>
+                <input class="bg-green-500 hover:bg-green-700 text-white font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline uppercase" type="submit" name="buy_submit" value="buy">    
                 <!-- <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
                   Forgot Password?
                 </a> -->
@@ -197,7 +236,7 @@
 
           <!-- SELL TAB -->
           <div id="tab-settings" class="hidden w-full max-w-xs">
-            <form action="" method="">
+            <form action="coin-trade.php" method="post">
               <div class="mb-4 flex justify-center">
                 <span class="flex text-gray-700 text-lg font-bold mb-2 uppercase">SELL  
                 <?php
@@ -550,65 +589,142 @@
   const buy_quantity = document.getElementById("BUY_bought_currency_amount");
   const buy_usd = document.getElementById("value_usd");
   const buy_zar = document.getElementById("value_zar");
+  
+  if (coin2 == "usd" || coin2 == "zar") {
+    one_crypto(<?php echo $spentCoinID ?>);
+  } else {
+    two_crypto();
+  }
 
-  const http = new XMLHttpRequest();
-  const url = 'https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd,zar&ids='+coin1+','+coin2;
-  http.open("GET", url);
-  http.send();
-  http.onreadystatechange = function() {
-    if(this.readyState==4 && this.status==200){ // checks if request complete and successful
-      coinsPrice = JSON.parse(http.responseText);
-      // convert object to array
-      var result = [];
-      for(var i in coinsPrice)
-          result.push([i, coinsPrice [i]]);
+  function two_crypto() {
+    const http = new XMLHttpRequest();
+    const url = 'https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd,zar&ids='+coin1+','+coin2;
+    http.open("GET", url);
+    http.send();
+    http.onreadystatechange = function() {
+      if(this.readyState==4 && this.status==200){ // checks if request complete and successful
+        coinsPrice = JSON.parse(http.responseText);
+        // convert object to array
+        var result = [];
+        for(var i in coinsPrice)
+            result.push([i, coinsPrice [i]]);
 
-      console.log(result);
+        let coin1_usd,coin2_usd,coin1_zar,coin2_zar = 0;
+        if (result[0][0] == '<?php echo $mainCoinUID ?>') {
+          coin1_usd = result[0][1].usd;
+          coin2_usd = result[1][1].usd;
+          coin1_zar = result[0][1].zar;
+          coin2_zar = result[1][1].zar;
+        } else {
+          coin1_usd = result[1][1].usd;
+          coin2_usd = result[0][1].usd;
+          coin1_zar = result[1][1].zar;
+          coin2_zar = result[0][1].zar;
+        }
 
-      let coin1_usd,coin2_usd,coin1_zar,coin2_zar = 0;
-      if (result[0][0] == '<?php echo $mainCoinUID ?>') {
-        coin1_usd = result[0][1].usd;
-        coin2_usd = result[1][1].usd;
-        coin1_zar = result[0][1].zar;
-        coin2_zar = result[1][1].zar;
-      } else {
-        coin1_usd = result[1][1].usd;
-        coin2_usd = result[0][1].usd;
-        coin1_zar = result[0][1].zar;
-        coin2_zar = result[1][1].zar;
-      }
-
-      let buycost = (coin1_usd / coin2_usd).toFixed(6).toLocaleString('en-US');
-
-      buy_spent.setAttribute("placeholder", buycost);
-      buy_spent.setAttribute("value", buycost);
-      buy_quantity.setAttribute("value", 1);
-      buy_price_per.setAttribute("value", buycost);
-      buy_usd.setAttribute("value", "$ "+(buy_spent.value * coin2_usd).toFixed(2));
-      buy_zar.setAttribute("value", "R "+(buy_spent.value * coin2_zar).toFixed(2));
-      
-      buy_quantity.addEventListener("keyup", (e) => {
-        updateBuy();
-      });
-      buy_spent.addEventListener("keyup", (e) => {
-        updateBuy();
-      });
-
-      function updateBuy() {
-        let z = buy_quantity.value;
-        let m = buy_spent.value;
-        buycost = (z*m).toFixed(6).toLocaleString('en-US');
-        console.log(z);
+        let buycost = (coin1_usd / coin2_usd).toFixed(6).toLocaleString('en-US');
+        buy_spent.setAttribute("placeholder", buycost);
+        buy_spent.setAttribute("value", buycost);
+        buy_quantity.setAttribute("value", 1);
         buy_price_per.setAttribute("value", buycost);
-        buy_price_per.setAttribute("placeholder", buycost);
-        buy_usd.setAttribute("value", "$ "+(buy_spent.value * coin2_usd).toFixed(2) );
-        buy_zar.setAttribute("value", "R "+(buy_spent.value * coin2_zar).toFixed(2) );
+        buy_usd.setAttribute("value", "$ "+(buy_spent.value * coin2_usd).toFixed(2));
+        buy_zar.setAttribute("value", "R "+(buy_spent.value * coin2_zar).toFixed(2));
+        
+        buy_quantity.addEventListener("keyup", (e) => {
+          updateBuy();
+        });
+        buy_spent.addEventListener("keyup", (e) => {
+          updateBuy();
+        });
+
+        function updateBuy() {
+          let z = buy_quantity.value;
+          let m = buy_spent.value;
+          buycost = (z*m).toFixed(6).toLocaleString('en-US');
+          buy_price_per.setAttribute("value", buycost);
+          buy_price_per.setAttribute("placeholder", buycost);
+          buy_usd.setAttribute("value", "$ "+(buy_spent.value * coin2_usd).toFixed(2) );
+          buy_zar.setAttribute("value", "R "+(buy_spent.value * coin2_zar).toFixed(2) );
+        }
+ 
       }
+    }
+  } // two_crypto END
+  
+  function one_crypto(spentCoinX) {
+    const http = new XMLHttpRequest();
+    const url = 'https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd,zar&ids='+coin1;
+    http.open("GET", url);
+    http.send();
+    http.onreadystatechange = function() {
+      if(this.readyState==4 && this.status==200){ // checks if request complete and successful
+        coinsPrice = JSON.parse(http.responseText);
+        // convert object to array
+        var result = [];
+        for(var i in coinsPrice)
+            result.push([i, coinsPrice [i]]);
 
+        console.log(result);
 
-      
+        let coin1_usd,coin1_zar,coin1_price,ratio = 0;
+        coin1_usd = result[0][1].usd;
+        coin1_zar = result[0][1].zar;
+        if (spentCoinX == 201) {
+          coin1_price = result[0][1].usd;
+          ratio = coin1_zar / coin1_usd;
+        } else {
+          coin1_price = result[0][1].zar;
+          ratio = coin1_usd / coin1_zar;
+        }
+
+        let buycost = coin1_price.toFixed(2).toLocaleString('en-US');
+        buy_spent.setAttribute("placeholder", buycost);
+        buy_spent.setAttribute("value", buycost);
+        buy_quantity.setAttribute("value", 1);
+        buy_price_per.setAttribute("value", buycost);
+        if (spentCoinX == 201) {
+            buy_usd.setAttribute("value", "$ "+ coin1_price.toFixed(2) );
+            buy_zar.setAttribute("value", "R "+ (coin1_price*ratio).toFixed(2) );
+          } else {
+            buy_usd.setAttribute("value", "$ "+ (coin1_price*ratio).toFixed(2) );
+            buy_zar.setAttribute("value", "R "+ coin1_price.toFixed(2) );
+          }
+        
+        buy_quantity.addEventListener("keyup", (e) => {
+          updateBuy();
+        });
+        buy_spent.addEventListener("keyup", (e) => {
+          updateBuy();
+        });
+
+        function updateBuy() {
+          let spentCoin2 = <?php echo $spentCoinID ?>; 
+          let z = buy_quantity.value;
+          let m = buy_spent.value;
+          buycost = (z*m).toFixed(2).toLocaleString('en-US');
+          buy_price_per.setAttribute("value", buycost);
+          buy_price_per.setAttribute("placeholder", buycost);
+          if (spentCoin2 == 201) {
+            buy_usd.setAttribute("value", "$ "+ (buy_spent.value) );
+            buy_zar.setAttribute("value", "R "+ ((buy_spent.value)*ratio).toFixed(2) );
+          } else {
+            buy_usd.setAttribute("value", "$ "+ ((buy_spent.value)*ratio).toFixed(2) );
+            buy_zar.setAttribute("value", "R "+ (buy_spent.value) );
+          }
+        }
+        
+      }
     }
   }
+
+  // value="2021-06-12T19:30" max="2021-06-14T00:00"
+  let today = new Date();
+  let todayISO = today.toLocaleString("sv", {timeZone: "Africa/Johannesburg"});
+  console.log(today.toLocaleString("sv", {timeZone: "Africa/Johannesburg"}));
+  console.log(today.toISOString().substring(0, 19));
+  let dateTime = document.getElementById('date_time');
+  dateTime.setAttribute("value", todayISO);
+  dateTime.setAttribute("max", todayISO);
 
 </script>
 
