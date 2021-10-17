@@ -36,18 +36,36 @@ for x in y:
                 x["symbol"],
                 x["id"]
                 ])
+# Write <li> list of data for portfolio
+f = open("test-list-portfolio.txt", "w")
 
-# Write <li> list of data
-f = open("test-list.txt", "w")
+f.write("<ul>\n")
+
+for x in y:
+    id = x["id"]
+    f.write("\t<li>"
+            + f"<a href=\"portfolio?addCoin={id}\" class=\"flex p-2 text-black hover:bg-gray-200 cursor-pointer\">"
+            + "<span><img class=\"w-7\" src=\"" + x["image"] + "\" /></span>"
+            # + " "
+            + "<span class=\"pl-3 mx-0 my-auto\">" + x["name"] + "</span>"
+            + "</a>"
+            + "</li>\n"
+            )
+
+f.write("</ul>")
+
+f.close()
+
+# Write <li> list of data for trades
+f = open("test-list-trade.txt", "w")
 
 f.write("<ul>\n")
 
 count = 0
 for x in y:
     count += 1
-    id = x["id"]
     f.write("\t<li>"
-            + f"<a href=\"portfolio?addCoin={id}\" class=\"flex p-2 text-black hover:bg-gray-200 cursor-pointer\">"
+            + f"<a href=\"trades?coin_id=<?php echo $_GET['coin_id']; ?>&coin_spent={count}\" class=\"flex p-2 text-black hover:bg-gray-200 cursor-pointer\">"
             + "<span><img class=\"w-7\" src=\"" + x["image"] + "\" /></span>"
             # + " "
             + "<span class=\"pl-3 mx-0 my-auto\">" + x["name"] + "</span>"

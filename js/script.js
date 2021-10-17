@@ -95,7 +95,6 @@ function topCoins() {
   }
 }
 
-
 function drawLineChart() {
   const data = {
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],

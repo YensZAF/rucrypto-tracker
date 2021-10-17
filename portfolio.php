@@ -93,9 +93,9 @@
       </div>
 
       <!-- Add margin if you want to see some of the overlay behind the modal-->
-      <div class="modal-content py-4 text-left px-6 h-1/2">
+      <div class="modal-content text-left h-1/2">
         <!--Title-->
-        <div class="flex justify-between items-center pb-3">
+        <div class="flex justify-between items-center pb-3 px-6 py-4">
           <p class="text-2xl font-bold">Search for Coins!</p>
           <div class="modal-close cursor-pointer z-50">
             <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
@@ -105,10 +105,10 @@
         </div>
 
         <!--Body-->
-        <div class="rounded shadow-md my-2 relative pin-t pin-l overflow-auto h-44">
-          <div class="p-2"><input type="text" id="myInput" onkeyup="searchAddCoins()" placeholder="Search for coins.." class="border-2 rounded h-8 w-full"></div>
+        <div class="rounded shadow-md mt-2 relative pin-t pin-l overflow-auto h-64">
+          <div class="p-2"><input type="text" id="myInput" onkeyup="searchAddCoins()" placeholder="Search for coins.." class="border-2 rounded h-8 px-3 py-4 w-full"></div>
           <ul id="myUL" class="list-reset">
-          <li><a href="portfolio?addCoin=bitcoin" class="flex p-2 text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" /></span><span class="pl-3 mx-0 my-auto">Bitcoin</span></a></li>
+            <li><a href="portfolio?addCoin=bitcoin" class="flex p-2 text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" /></span><span class="pl-3 mx-0 my-auto">Bitcoin</span></a></li>
             <li><a href="portfolio?addCoin=ethereum" class="flex p-2 text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880" /></span><span class="pl-3 mx-0 my-auto">Ethereum</span></a></li>
             <li><a href="portfolio?addCoin=binancecoin" class="flex p-2 text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png?1547034615" /></span><span class="pl-3 mx-0 my-auto">Binance Coin</span></a></li>
             <li><a href="portfolio?addCoin=tether" class="flex p-2 text-black hover:bg-gray-200 cursor-pointer"><span><img class="w-7" src="https://assets.coingecko.com/coins/images/325/large/Tether-logo.png?1598003707" /></span><span class="pl-3 mx-0 my-auto">Tether</span></a></li>
