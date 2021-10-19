@@ -30,18 +30,18 @@
       <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex-shrink-0 flex items-center">
           <!-- <img class="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow"> -->
-          <a href="home"><img class="block lg:hidden h-8 w-auto" src="assets/logo.svg" alt="RUcrypto"></a>
+          <a href="index.php"><img class="block lg:hidden h-8 w-auto" src="assets/logo.svg" alt="RUcrypto"></a>
           <!-- <img class="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow"> -->
           <img class="hidden lg:block h-8 w-auto" src="assets/logo-text.svg" alt="RUcrypto">
         </div>
         <div class="hidden sm:block sm:ml-6">
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="home" class="<?php if ($CURRENT_PAGE=="Index") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Home</a>
-            <a href="about" class="<?php if ($CURRENT_PAGE=="About") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">About Us</a>
-            <a href="blog" class="<?php if ($CURRENT_PAGE=="Blog") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Blog</a>
+            <a href="index.php" class="<?php if ($CURRENT_PAGE=="Index") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Home</a>
+            <a href="about.php" class="<?php if ($CURRENT_PAGE=="About") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">About Us</a>
+            <a href="blog.php" class="<?php if ($CURRENT_PAGE=="Blog") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Blog</a>
             <?php if (isset($_SESSION['useruid'])) { ?>
-            <a href="portfolio" class="<?php if ($CURRENT_PAGE=="Portfolio" || $CURRENT_PAGE=="Trades") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Portfolio</a>
+            <a href="portfolio.php" class="<?php if ($CURRENT_PAGE=="Portfolio" || $CURRENT_PAGE=="Trades") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Portfolio</a>
             <?php } ?>
           </div>
         </div>
@@ -60,7 +60,7 @@
         <?php if (isset($_SESSION['useruid'])) { ?>
         
         <!-- Profile name -->
-        <a href="home" class="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"><?php echo $_SESSION['useruid'] ?></a>
+        <a href="index.php" class="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"><?php echo $_SESSION['useruid'] ?></a>
             
         <!-- Profile dropdown -->
         <div class="ml-3 relative">
@@ -85,19 +85,18 @@
           -->
           <div id="user-menu" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" tabindex="-1">
             <!-- Active: "bg-gray-100", Not Active: "" -->
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1"><i class="fa fa-cog text-base mr-1"></i>Settings</a>
-            <a href="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-2"><i class="fa fa-sign-out text-base mr-1"></i>Sign out</a>
+            <a href="includes/logout-action.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-2"><i class="fa fa-sign-out text-base mr-1"></i>Sign out</a>
           </div>
         </div>
 
         <?php } else { ?>
 
           <div class="flex space-x-4">
-            <a href="login" class="<?php if ($CURRENT_PAGE=="Login") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">
+            <a href="login.php" class="<?php if ($CURRENT_PAGE=="Login") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">
               Login
             </a>
-            <a href="signup" class="text-white bg-rucrypto hover:bg-rucrypto-dark px-3 py-2 rounded-md text-sm font-medium">
+            <a href="signup.php" class="text-white bg-rucrypto hover:bg-rucrypto-dark px-3 py-2 rounded-md text-sm font-medium">
               Sign Up
             </a>
           </div>
@@ -112,11 +111,11 @@
   <div class="sm:hidden hidden" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1">
       <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-      <a href="home" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Home</a>
-      <a href="about" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About us</a>
-      <a href="blog" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+      <a href="index.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Home</a>
+      <a href="about.php" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About us</a>
+      <a href="blog.php" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Blog</a>
       <?php if (isset($_SESSION['useruid'])) { ?>
-      <a href="portfolio" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Portfolio</a>
+      <a href="portfolio.php" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Portfolio</a>
       <?php } ?>
     </div>
   </div>

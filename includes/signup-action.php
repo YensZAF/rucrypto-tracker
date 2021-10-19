@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) { // checks if user uses post to get to the page
     require_once 'functions.php';
 
     if (uidExists($conn,$username,$email) !== false) {
-        header("location: ../signup?error=usernametaken");
+        header("location: ../signup.php?error=usernametaken");
         exit();
     }
 
@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) { // checks if user uses post to get to the page
 
 } else {
 
-    header("location: signup");
+    header("location: signup.php");
     
 }
 

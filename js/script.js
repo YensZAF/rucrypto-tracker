@@ -1,3 +1,6 @@
+function roundToTwo(num) {
+  return +(Math.round(num + "e+2")  + "e-2");
+}
 
 // USER MENU
 const accountPic = document.querySelector('#user-menu-button');
@@ -90,7 +93,15 @@ function topCoins() {
       td_image.innerHTML = "<img class=\"w-7\" src=\""+pic+"\" />";
       td_name.innerHTML = name;
       td_price.innerHTML = "$"+price;
-      td_change.innerHTML = change+"%";
+      td_change.innerHTML = roundToTwo(change)+"%";
+
+      if (change < 0) {
+        td_change.classList.remove("text-gray-500");
+        td_change.classList.add("text-red-500");
+      } else {
+        td_change.classList.remove("text-gray-500");
+        td_change.classList.add("text-green-500");
+      } // end if
     } 
   }
 }
@@ -116,28 +127,70 @@ function drawLineChart() {
   );
 }
 
-function drawdoughChart() {
-  const data = {
-    labels: ['Red', 'Blue', 'Yellow'],
-    datasets: [{
-      label: 'My First Dataset',
-      data: [300, 50, 100],
-      backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)'
-      ],
-      hoverOffset: 4
-    }]
-  };
-  const config = {
-    type: 'doughnut',
-    data: data,
-  };
-  var myChart = new Chart(
-    document.getElementById('doughChart'),
-    config
-  );
+function drawdoughChart(coins,price) {
+  if (coins == []) {
+
+  } else {
+      const data = {
+        labels: coins,
+        datasets: [{
+          label: 'Inventory',
+          data: price,
+          backgroundColor: palette('tol-dv', price.length).map(function(hex) {
+            return '#' + hex;
+          }),
+          hoverOffset: 4
+        }]
+      };
+      var options = {
+        title: {
+          display: true,
+          position: "top",
+          text: "Coins Owned:",
+          fontSize: 18,
+          fontColor: "#111"
+        },
+        legend: {
+          display: true,
+          position: "right",
+          labels: {
+            fontColor: "#333",
+            fontSize: 16
+          }
+        }
+      };
+      const config = {
+        type: 'doughnut',
+        data: data,
+        options: options
+      };
+      var myChart = new Chart(
+        document.getElementById('doughChart'),
+        config
+      );
+  }
+  
+  // const data = {
+  //   labels: ['Red', 'Blue', 'Yellow'],
+  //   datasets: [{
+  //     label: 'My First Dataset',
+  //     data: [300, 50, 100],
+  //     backgroundColor: [
+  //       'rgb(255, 99, 132)',
+  //       'rgb(54, 162, 235)',
+  //       'rgb(255, 205, 86)'
+  //     ],
+  //     hoverOffset: 4
+  //   }]
+  // };
+  // const config = {
+  //   type: 'doughnut',
+  //   data: data,
+  // };
+  // var myChart = new Chart(
+  //   document.getElementById('doughChart'),
+  //   config
+  // );
 }
 
 
@@ -158,39 +211,80 @@ function check_pwd() {
 
 
 // Portfolio Search MODAL
-var openmodal = document.querySelectorAll('.modal-open')
-    for (var i = 0; i < openmodal.length; i++) {
-      openmodal[i].addEventListener('click', function(event){
-    	event.preventDefault()
-    	toggleModal()
-      })
+function modal() {
+  var openmodal = document.querySelectorAll('.modal-open')
+  for (var i = 0; i < openmodal.length; i++) {
+    openmodal[i].addEventListener('click', function(event){
+    event.preventDefault()
+    toggleModal()
+    })
+  }
+  const overlay = document.querySelector('.modal-overlay')
+  overlay.addEventListener('click', toggleModal)
+  var closemodal = document.querySelectorAll('.modal-close')
+  for (var i = 0; i < closemodal.length; i++) {
+    closemodal[i].addEventListener('click', toggleModal)
+  }
+  document.onkeydown = function(evt) {
+    evt = evt || window.event
+    var isEscape = false
+    if ("key" in evt) {
+    isEscape = (evt.key === "Escape" || evt.key === "Esc")
+    } else {
+    isEscape = (evt.keyCode === 27)
     }
-    const overlay = document.querySelector('.modal-overlay')
-    overlay.addEventListener('click', toggleModal)
-    
-    var closemodal = document.querySelectorAll('.modal-close')
-    for (var i = 0; i < closemodal.length; i++) {
-      closemodal[i].addEventListener('click', toggleModal)
+    if (isEscape && document.body.classList.contains('modal-active')) {
+    toggleModal()
     }
-    document.onkeydown = function(evt) {
-      evt = evt || window.event
-      var isEscape = false
-      if ("key" in evt) {
-    	isEscape = (evt.key === "Escape" || evt.key === "Esc")
-      } else {
-    	isEscape = (evt.keyCode === 27)
-      }
-      if (isEscape && document.body.classList.contains('modal-active')) {
-    	toggleModal()
-      }
-    };
-    function toggleModal () {
-      const body = document.querySelector('body')
-      const modal = document.querySelector('.modal')
-      modal.classList.toggle('opacity-0')
-      modal.classList.toggle('pointer-events-none')
-      body.classList.toggle('modal-active')
+  };
+  function toggleModal () {
+    const body = document.querySelector('body')
+    const modal = document.querySelector('.modal')
+    modal.classList.toggle('opacity-0')
+    modal.classList.toggle('pointer-events-none')
+    body.classList.toggle('modal-active')
+  }
+}
+
+// Trade Sell MODAL
+function modalSell() {
+  var openmodal = document.querySelectorAll('.modal-open2')
+  for (var i = 0; i < openmodal.length; i++) {
+    openmodal[i].addEventListener('click', function(event){
+    event.preventDefault()
+    toggleModal()
+    })
+  }
+  const overlay = document.querySelector('.modal-overlay2')
+  overlay.addEventListener('click', toggleModal)
+  var closemodal = document.querySelectorAll('.modal-close2')
+  for (var i = 0; i < closemodal.length; i++) {
+    closemodal[i].addEventListener('click', toggleModal)
+  }
+  document.onkeydown = function(evt) {
+    evt = evt || window.event
+    var isEscape = false
+    if ("key" in evt) {
+    isEscape = (evt.key === "Escape" || evt.key === "Esc")
+    } else {
+    isEscape = (evt.keyCode === 27)
     }
+    if (isEscape && document.body.classList.contains('modal-active2')) {
+    toggleModal()
+    }
+  };
+  function toggleModal () {
+    const body = document.querySelector('body')
+    const modal = document.querySelector('.modal2')
+    modal.classList.toggle('opacity-0')
+    modal.classList.toggle('pointer-events-none')
+    body.classList.toggle('modal-active2')
+  }
+}
+
+
+
+
 
 
 // Search ADD coins on profile page MODAL
@@ -241,4 +335,261 @@ function changeAtiveTab(event,tabID,tabType){
   }
   document.getElementById(tabID).classList.remove("hidden");
   document.getElementById(tabID).classList.add("block");
-}
+} // Trades Table END
+
+function buyTable(mainID,mainUID,spentID,spentUID) {
+  const coin1 = mainUID;
+  const coin2 = spentUID;
+  const buy_spent = document.getElementById("BUY_sold_currency_amount");
+  const buy_price_per = document.getElementById("BUY_price_per");
+  const buy_quantity = document.getElementById("BUY_bought_currency_amount");
+  const buy_usd = document.getElementById("value_usd");
+  const buy_zar = document.getElementById("value_zar");
+  
+  if (coin2 == "usd" || coin2 == "zar") {
+    one_crypto(spentID);
+  } else {
+    two_crypto();
+  }
+
+  function two_crypto() {
+    const http = new XMLHttpRequest();
+    const url = 'https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd,zar&ids='+coin1+','+coin2;
+    http.open("GET", url);
+    http.send();
+    http.onreadystatechange = function() {
+      if(this.readyState==4 && this.status==200){ // checks if request complete and successful
+        coinsPrice = JSON.parse(http.responseText);
+        // convert object to array
+        var result = [];
+        for(var i in coinsPrice)
+            result.push([i, coinsPrice [i]]);
+
+        let coin1_usd,coin2_usd,coin1_zar,coin2_zar = 0;
+        if (result[0][0] == mainUID) {
+          coin1_usd = result[0][1].usd;
+          coin2_usd = result[1][1].usd;
+          coin1_zar = result[0][1].zar;
+          coin2_zar = result[1][1].zar;
+        } else {
+          coin1_usd = result[1][1].usd;
+          coin2_usd = result[0][1].usd;
+          coin1_zar = result[1][1].zar;
+          coin2_zar = result[0][1].zar;
+        }
+
+        updateBuy();
+        
+        buy_quantity.addEventListener("keyup", (e) => {
+          updateBuy();
+        });
+        buy_price_per.addEventListener("keyup", (e) => {
+          updateBuy();
+        });
+
+        function updateBuy() {
+          let buycost = (coin1_usd / coin2_usd).toFixed(6).toLocaleString('en-US');
+          buy_price_per.setAttribute("placeholder", buycost);
+          buy_price_per.setAttribute("value", buycost);
+          buy_quantity.setAttribute("value", 1);
+          let z = buy_quantity.value;
+          let m = buy_price_per.value;
+          buycost = (z*m).toFixed(6).toLocaleString('en-US');
+          buy_spent.setAttribute("value", buycost);
+          buy_spent.setAttribute("placeholder", buycost);
+          buy_usd.setAttribute("value", "$ "+(buy_spent.value * coin2_usd).toFixed(2) );
+          buy_zar.setAttribute("value", "R "+(buy_spent.value * coin2_zar).toFixed(2) );
+        }
+ 
+      }
+    } // end http state
+  } // two_crypto END
+  
+  function one_crypto(spentCoinX) {
+    const http = new XMLHttpRequest();
+    const url = 'https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd,zar&ids='+coin1;
+    http.open("GET", url);
+    http.send();
+    http.onreadystatechange = function() {
+      if(this.readyState==4 && this.status==200){ // checks if request complete and successful
+        coinsPrice = JSON.parse(http.responseText);
+        // convert object to array
+        var result = [];
+        for(var i in coinsPrice)
+            result.push([i, coinsPrice [i]]);
+
+        console.log(result);
+
+        let coin1_usd,coin1_zar,coin1_price,ratio = 0;
+        coin1_usd = result[0][1].usd;
+        coin1_zar = result[0][1].zar;
+        if (spentCoinX == 201) {
+          coin1_price = result[0][1].usd;
+          ratio = coin1_zar / coin1_usd;
+        } else {
+          coin1_price = result[0][1].zar;
+          ratio = coin1_usd / coin1_zar;
+        }
+
+        updateBuy();
+        
+        buy_quantity.addEventListener("keyup", (e) => {
+          updateBuy();
+        });
+        buy_price_per.addEventListener("keyup", (e) => {
+          updateBuy();
+        });
+
+        function updateBuy() {
+          let buycost = coin1_price.toFixed(2).toLocaleString('en-US');
+          buy_price_per.setAttribute("placeholder", buycost);
+          buy_price_per.setAttribute("value", buycost);
+          buy_quantity.setAttribute("value", 1);
+          let spentCoin2 = spentID; 
+          let z = buy_quantity.value;
+          let m = buy_price_per.value;
+          buycost = (z*m).toFixed(2).toLocaleString('en-US');
+          buy_spent.setAttribute("value", buycost);
+          buy_spent.setAttribute("placeholder", buycost);
+          if (spentCoin2 == 201) {
+            buy_usd.setAttribute("value", "$ "+ (buy_spent.value) );
+            buy_zar.setAttribute("value", "R "+ ((buy_spent.value)*ratio).toFixed(2) );
+          } else {
+            buy_usd.setAttribute("value", "$ "+ ((buy_spent.value)*ratio).toFixed(2) );
+            buy_zar.setAttribute("value", "R "+ (buy_spent.value) );
+          }
+        }
+        
+      }
+    } // end http state
+  } // end one_crypto
+} // buyTable END
+
+
+function sellTable(mainID,mainUID,spentID,spentUID) {
+  const coin1 = mainUID;
+  const coin2 = spentUID;
+  const buy_spent = document.getElementById("SELL_sold_currency_amount");
+  const buy_price_per = document.getElementById("SELL_price_per");
+  const buy_quantity = document.getElementById("SELL_bought_currency_amount");
+  const buy_usd = document.getElementById("value_usd_SELL");
+  const buy_zar = document.getElementById("value_zar_SELL");
+  
+  if (coin2 == "usd" || coin2 == "zar") {
+    one_crypto(spentID);
+  } else {
+    two_crypto();
+  }
+
+  function two_crypto() {
+    const http = new XMLHttpRequest();
+    const url = 'https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd,zar&ids='+coin1+','+coin2;
+    http.open("GET", url);
+    http.send();
+    http.onreadystatechange = function() {
+      if(this.readyState==4 && this.status==200){ // checks if request complete and successful
+        coinsPrice = JSON.parse(http.responseText);
+        // convert object to array
+        var result = [];
+        for(var i in coinsPrice)
+            result.push([i, coinsPrice [i]]);
+
+        let coin1_usd,coin2_usd,coin1_zar,coin2_zar = 0;
+        if (result[0][0] == mainUID) {
+          coin1_usd = result[0][1].usd;
+          coin2_usd = result[1][1].usd;
+          coin1_zar = result[0][1].zar;
+          coin2_zar = result[1][1].zar;
+        } else {
+          coin1_usd = result[1][1].usd;
+          coin2_usd = result[0][1].usd;
+          coin1_zar = result[1][1].zar;
+          coin2_zar = result[0][1].zar;
+        }
+
+        updateBuy();
+        
+        buy_quantity.addEventListener("keyup", (e) => {
+          updateBuy();
+        });
+        buy_price_per.addEventListener("keyup", (e) => {
+          updateBuy();
+        });
+
+        function updateBuy() {
+          let buycost = (coin1_usd / coin2_usd).toFixed(6).toLocaleString('en-US');
+          buy_price_per.setAttribute("placeholder", buycost);
+          buy_price_per.setAttribute("value", buycost);
+          buy_quantity.setAttribute("value", 1);
+          let z = buy_quantity.value;
+          let m = buy_price_per.value;
+          buycost = (z*m).toFixed(6).toLocaleString('en-US');
+          buy_spent.setAttribute("value", buycost);
+          buy_spent.setAttribute("placeholder", buycost);
+          buy_usd.setAttribute("value", "$ "+(buy_spent.value * coin2_usd).toFixed(2) );
+          buy_zar.setAttribute("value", "R "+(buy_spent.value * coin2_zar).toFixed(2) );
+        }
+ 
+      }
+    } // end http state
+  } // two_crypto END
+  
+  function one_crypto(spentCoinX) {
+    const http = new XMLHttpRequest();
+    const url = 'https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd,zar&ids='+coin1;
+    http.open("GET", url);
+    http.send();
+    http.onreadystatechange = function() {
+      if(this.readyState==4 && this.status==200){ // checks if request complete and successful
+        coinsPrice = JSON.parse(http.responseText);
+        // convert object to array
+        var result = [];
+        for(var i in coinsPrice)
+            result.push([i, coinsPrice [i]]);
+
+        console.log(result);
+
+        let coin1_usd,coin1_zar,coin1_price,ratio = 0;
+        coin1_usd = result[0][1].usd;
+        coin1_zar = result[0][1].zar;
+        if (spentCoinX == 201) {
+          coin1_price = result[0][1].usd;
+          ratio = coin1_zar / coin1_usd;
+        } else {
+          coin1_price = result[0][1].zar;
+          ratio = coin1_usd / coin1_zar;
+        }
+
+        updateBuy();
+        
+        buy_quantity.addEventListener("keyup", (e) => {
+          updateBuy();
+        });
+        buy_price_per.addEventListener("keyup", (e) => {
+          updateBuy();
+        });
+
+        function updateBuy() {
+          let buycost = coin1_price.toFixed(2).toLocaleString('en-US');
+          buy_price_per.setAttribute("placeholder", buycost);
+          buy_price_per.setAttribute("value", buycost);
+          buy_quantity.setAttribute("value", 1);
+          let spentCoin2 = spentID; 
+          let z = buy_quantity.value;
+          let m = buy_price_per.value;
+          buycost = (z*m).toFixed(2).toLocaleString('en-US');
+          buy_spent.setAttribute("value", buycost);
+          buy_spent.setAttribute("placeholder", buycost);
+          if (spentCoin2 == 201) {
+            buy_usd.setAttribute("value", "$ "+ (buy_spent.value) );
+            buy_zar.setAttribute("value", "R "+ ((buy_spent.value)*ratio).toFixed(2) );
+          } else {
+            buy_usd.setAttribute("value", "$ "+ ((buy_spent.value)*ratio).toFixed(2) );
+            buy_zar.setAttribute("value", "R "+ (buy_spent.value) );
+          }
+        }
+        
+      }
+    } // end http state
+  } // end one_crypto
+} // sellTable END

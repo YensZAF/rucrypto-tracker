@@ -7,5 +7,5 @@ $coin_id = $_REQUEST['coin_id'];
 $userID = $_SESSION['userid'];
 delete_coin($coin_id,$userID,$conn);
 
-header("location: ../portfolio");
+header("location: ../portfolio.php");
 exit();

@@ -31,7 +31,7 @@ switch ($_SERVER['SCRIPT_NAME']) {
     $CURRENT_PAGE = 'Portfolio';
     $PAGE_TITLE = 'Portfolio Summary';
     break;
-  case '/rucrypto-tracker/coin-trade.php':
+  case '/rucrypto-tracker/trades.php':
     $CURRENT_PAGE = 'Trades';
     $PAGE_TITLE = 'Trade coins';
     break;
