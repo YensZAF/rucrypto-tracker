@@ -21,13 +21,22 @@ function createUser($conn, $name, $email, $username, $pwd)  {
     $multiavatar = new Multiavatar();
     $svgCode = $multiavatar($username, null, null);
 
-    $sql = "INSERT INTO user (user_fullname, email, user_uid, passwd, user_pic) VALUES ('$name', '$email', '$username', '$hasedPwd','$svgCode');";
-
+    $sql = "INSERT INTO rucrypto.user (user_fullname, email, user_uid, passwd, user_pic) VALUES ('$name', '$email', '$username', '$hasedPwd','$svgCode');";
     mysqli_query($conn, $sql) or die("createUser()1 failed!");
 
-    $sql = "INSERT INTO watch_list (user_uid) VALUE ('$username');";
-
+    $sql = "INSERT INTO rucrypto.watch_list (user_uid) VALUE ('$username');";
     mysqli_query($conn, $sql) or die("createUser()2 failed!");
+
+    $sql = "SELECT user_id FROM rucrypto.user WHERE user_uid = '$username';";
+    $userIDquery = mysqli_query($conn, $sql) or die("query ID in create failed!");
+    $row = $userIDquery->fetch_row();
+    $userIDquery = $row[0] ?? false;
+    $myfile = fopen("../assets/$userIDquery.svg", "w");
+    fwrite($myfile,"$svgCode");
+    fclose($myfile);
+    
+    $sql = "UPDATE rucrypto.user SET user_pic = 'assets/$userIDquery.svg' WHERE user_id = '$userIDquery';";
+    mysqli_query($conn, $sql) or die("createUser()1 failed!");
 
     mysqli_close($conn);
     header("location: ../signup.php?error=none");
@@ -89,19 +98,45 @@ function addInventory($coin_uid,$userID,$conn) {
 function totalQuantity($userID,$coinID,$conn) {
   $sql = "SELECT sum(bought_currency_amount) 
           FROM rucrypto.trade
-          WHERE type = 'sell' AND currency_id = $coinID;";
+          WHERE type = 'sell' AND currency_id = $coinID AND user_id = '$userID';";
   $sell = mysqli_query($conn, $sql) or die("fetchsellQuantity failed!");
   $row = $sell->fetch_row();
   $sell = $row[0] ?? false;
 
   $sql = "SELECT sum(bought_currency_amount) 
           FROM rucrypto.trade
-          WHERE type = 'buy' AND currency_id = $coinID;";
+          WHERE type = 'buy' AND currency_id = $coinID AND user_id = '$userID';";
   $buy = mysqli_query($conn, $sql) or die("fetchbuyQuantity failed!");
   $row = $buy->fetch_row();
   $buy = $row[0] ?? false;
 
   $total = ($buy - $sell);
+  echo $total;
+}
+
+
+function printTradeUSD($userID,$coinID,$conn) {
+  $sql = "SELECT value_usd
+        FROM rucrypto.trade
+        WHERE type = 'sell' AND currency_id = $coinID AND user_id = '$userID';";
+  $sell = mysqli_query($conn, $sql) or die("fetchsellUSD failed!");
+  $sellNum = 0;
+  while ($row = mysqli_fetch_array($sell)) {
+    $temp = substr($row[0],1);
+    $sellNum += (float)$temp;
+  }
+
+  $sql = "SELECT value_usd
+        FROM rucrypto.trade
+        WHERE type = 'buy' AND currency_id = $coinID AND user_id = '$userID';";
+  $buy = mysqli_query($conn, $sql) or die("fetchbuyUSD failed!");
+  $buyNum = 0;
+  while ($row = mysqli_fetch_array($buy)) {
+    $temp = substr($row[0],1);
+    $buyNum += (float)$temp;
+  }
+
+  $total = ($buyNum - $sellNum);
   echo $total;
 }
 
@@ -141,6 +176,7 @@ function printInventory($userID,$conn) {
         </a>
       </td>
       <td class="hidden"><?php printCurrencyUID($row['currency_id'],$conn); ?></td>
+      <td class="hidden"><?php printTradeUSD($userID,$row['currency_id'],$conn); ?></td>
     </tr>
 <?php
   }// while loop end
@@ -189,6 +225,7 @@ function printCurrencyUID($coinID,$conn) {
   echo $sym;
 }
 
+
 function printTrades($userID,$coinID,$conn) {
   $sql = "SELECT * 
           FROM trade
@@ -216,7 +253,7 @@ function printTrades($userID,$coinID,$conn) {
       <!-- <td class="px-6 py-4 text-sm text-gray-500">0%</td> -->
       <td class="pl-6 pr-3 py-4 text-sm text-gray-500">
         <a href="#" class="inline-flex items-center font-bold hover:text-blue-500 text-black text-lg text-center align-middle">
-          <i class="fa fa-edit"></i>
+          <!-- <i class="fa fa-edit"></i> -->
         </a>
       </td>
       <td class="pl-3 pr-6 text-sm text-gray-500">

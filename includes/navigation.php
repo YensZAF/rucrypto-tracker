@@ -40,6 +40,8 @@
             <a href="index.php" class="<?php if ($CURRENT_PAGE=="Index") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Home</a>
             <a href="about.php" class="<?php if ($CURRENT_PAGE=="About") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">About Us</a>
             <a href="blog.php" class="<?php if ($CURRENT_PAGE=="Blog") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Blog</a>
+            <a href="help.php" class="<?php if ($CURRENT_PAGE=="Help") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Help</a>
+            <a href="contact.php" class="<?php if ($CURRENT_PAGE=="Contact") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Contact</a>
             <?php if (isset($_SESSION['useruid'])) { ?>
             <a href="portfolio.php" class="<?php if ($CURRENT_PAGE=="Portfolio" || $CURRENT_PAGE=="Trades") { ?>menu_active<?php } else { ?>menu_unactive<?php } ?>">Portfolio</a>
             <?php } ?>
@@ -60,7 +62,7 @@
         <?php if (isset($_SESSION['useruid'])) { ?>
         
         <!-- Profile name -->
-        <a href="index.php" class="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"><?php echo $_SESSION['useruid'] ?></a>
+        <a href="settings.php" class="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"><?php echo $_SESSION['useruid'] ?></a>
             
         <!-- Profile dropdown -->
         <div class="ml-3 relative">
@@ -68,8 +70,8 @@
             <button type="button" class="bg-gray-800 flex text-sm rounded-full" id="user-menu-button">
               <span class="sr-only">Open user menu</span>
               <!-- <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""> -->
-              <div class="h-8 w-8 rounded-full">
-                <?php echo $_SESSION['userpic']; ?>
+              <div class="flex-wrap w-8 h-8 overflow-hidden relative rounded-full">
+                  <img src="<?php echo $_SESSION['userpic']; ?>" class="shadow w-auto mx-auto my-auto h-full align-middle border-none"/>
               </div>
             </button>
           </div>
@@ -85,7 +87,7 @@
           -->
           <div id="user-menu" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" tabindex="-1">
             <!-- Active: "bg-gray-100", Not Active: "" -->
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1"><i class="fa fa-cog text-base mr-1"></i>Settings</a>
+            <a href="settings.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1"><i class="fa fa-cog text-base mr-1"></i>Settings</a>
             <a href="includes/logout-action.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-2"><i class="fa fa-sign-out text-base mr-1"></i>Sign out</a>
           </div>
         </div>
@@ -114,6 +116,8 @@
       <a href="index.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Home</a>
       <a href="about.php" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About us</a>
       <a href="blog.php" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+      <a href="help.php" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Help</a>
+      <a href="contact.php" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
       <?php if (isset($_SESSION['useruid'])) { ?>
       <a href="portfolio.php" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Portfolio</a>
       <?php } ?>

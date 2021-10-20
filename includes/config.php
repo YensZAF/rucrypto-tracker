@@ -7,7 +7,7 @@ $conn = mysqli_connect($serverName, $dBUserName, $dBPassword, $dBName)
 
 
 switch ($_SERVER['SCRIPT_NAME']) {
-  case '/rucrypto-tracker/login.php':
+  case '/rucrypto-tracker/login.php': // /SysDev/RUcrypto
     $CURRENT_PAGE = 'Login';
     $PAGE_TITLE = 'Login into your app!';
     break;
@@ -34,6 +34,18 @@ switch ($_SERVER['SCRIPT_NAME']) {
   case '/rucrypto-tracker/trades.php':
     $CURRENT_PAGE = 'Trades';
     $PAGE_TITLE = 'Trade coins';
+    break;
+  case '/rucrypto-tracker/settings.php':
+    $CURRENT_PAGE = 'Settings';
+    $PAGE_TITLE = 'Account';
+    break;
+  case '/rucrypto-tracker/help.php':
+    $CURRENT_PAGE = 'Help';
+    $PAGE_TITLE = 'FAQ Below!';
+    break;
+  case '/rucrypto-tracker/contact.php':
+    $CURRENT_PAGE = 'Contact';
+    $PAGE_TITLE = 'Contact Us!';
     break;
   default:
     $CURRENT_PAGE = 'Index';

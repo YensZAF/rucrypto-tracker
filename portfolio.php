@@ -28,7 +28,6 @@
 
 <?php include_once("includes/navigation.php") ?>
 
-<h2><?php echo $CURRENT_PAGE ?></h2>
 
   <div class="mb-8 p-2 w-full flex justify-center flex-wrap bg-grey-light">
     <div class="h-auto w-full lg:w-1/5 md:w-1/3  bg-grey">
@@ -39,6 +38,23 @@
     </div> -->
   </div>
 
+
+  <div class="container w-1/4 mb-5 flex justify-center mx-auto">
+      <div class="relative w-52 h-52 bg-cover bg-center group rounded-lg overflow-hidden shadow-lg transition duration-300 ease-in-out"
+        style="background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f868ecef-4b4a-4ddf-8239-83b2568b3a6b/de7hhu3-3eae646a-9b2e-4e42-84a4-532bff43f397.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Y4NjhlY2VmLTRiNGEtNGRkZi04MjM5LTgzYjI1NjhiM2E2YlwvZGU3aGh1My0zZWFlNjQ2YS05YjJlLTRlNDItODRhNC01MzJiZmY0M2YzOTcuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.R0h-BS0osJSrsb1iws4-KE43bUXHMFvu5PvNfoaoi8o');">
+          <div class="absolute inset-0 bg-pink-900 bg-opacity-75 transition duration-300 ease-in-out"></div>
+          <div class="relative w-full h-full px-4 sm:px-6 lg:px-4 flex items-center justify-center">
+            <div>
+              <h3 class="text-center text-white text-lg">
+                    Total Balance
+              </h3>
+              <h3 id="walletTotal" class="text-center text-white text-3xl mt-2 font-bold">
+                    $ 0
+              </h3>
+            </div>
+          </div>
+      </div>
+  </div>
 
       <div class="container w-1/4 mb-5 flex justify-center mx-auto">
           <button type="submit" id="submit" name="submit" class="modal-open flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-rucrypto hover:bg-rucrypto-dark rounded py-2 w-full transition duration-150 ease-in">
@@ -356,13 +372,32 @@
       }
 
       rowPrice = [];
+      rowPriceOld = [];
       for(i = 0; i < inven.length; ++i) {
         let pricePer = inven[i].children[2].innerHTML.substring(2).replace(',','');
         let quant = inven[i].children[3].innerHTML.replace(',','');
+        let priceOld = inven[i].children[9].innerHTML;
         rowPrice.push(pricePer*quant);
+        rowPriceOld.push(parseInt(priceOld));
+
+        let pnL = inven[i].children[6];
+        let tempNumPNL = ( ((pricePer*quant) - priceOld ) / priceOld ) * 100;
+        if (tempNumPNL < 0) {
+          pnL.classList.remove("text-gray-500");
+          pnL.classList.add("text-red-500");
+        } else {
+          pnL.classList.remove("text-gray-500");
+          pnL.classList.add("text-green-500");
+        }
+        pnL.innerHTML = tempNumPNL.toFixed(4) + "%";
       }
       console.log(rows);
       console.log(rowPrice);
+      console.log(rowPriceOld);
+
+      const walletT = document.getElementById("walletTotal");
+      let walletTotal = rowPrice.reduce((a, b) => a + b, 0);
+      walletT.innerHTML = "$ "+roundToTwo(walletTotal).toLocaleString("en-US");
 
       drawdoughChart(rows,rowPrice);
 

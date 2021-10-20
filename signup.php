@@ -6,7 +6,10 @@
 </head>
 <body>
 
-<?php include_once("includes/navigation.php"); ?>
+<?php
+include_once("includes/navigation.php");
+include_once("includes/banner.php");
+?>
 
     <!-- <section class="signup">
         <h3>Sign Up</h3>
